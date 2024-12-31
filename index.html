@@ -76,6 +76,10 @@
         .shop-item button:hover {
             background-color: #2980b9;
         }
+        #boost-timer {
+            font-size: 1.2em;
+            color: #f1c40f;
+        }
     </style>
 </head>
 <body>
@@ -85,6 +89,7 @@
             <p>Gold: <span id="gold">0</span></p>
             <p>Damage Per Click: <span id="dpc">1</span></p>
             <p>Monster Health: <span id="health">100</span></p>
+            <div id="boost-timer"></div>
             <div class="health-bar">
                 <div id="health-bar-inner" class="health-bar-inner"></div>
             </div>
@@ -99,8 +104,18 @@
             </div>
             <div class="shop-item">
                 <h3>Gold Boost</h3>
-                <p>Earn 2x gold for each monster. Cost: 50 Gold</p>
+                <p>Earn 2x gold for 1 minute. Cost: 50 Gold</p>
                 <button id="buy-gold-boost">Buy</button>
+            </div>
+            <div class="shop-item">
+                <h3>Buy Gold</h3>
+                <p>Buy 100 gold for ₹10</p>
+                <button id="buy-gold">Buy</button>
+            </div>
+            <div class="shop-item">
+                <h3>Watch Ad</h3>
+                <p>Earn 20 gold for watching an ad.</p>
+                <button id="watch-ad">Watch</button>
             </div>
         </div>
     </div>
