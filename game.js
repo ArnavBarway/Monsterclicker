@@ -83,9 +83,17 @@ buyGoldButton.addEventListener("click", () => {
 
 // Handle watching an ad
 watchAdButton.addEventListener("click", () => {
-    alert("You watched an ad!");
-    gold += 20;
-    updateStats();
+    watchAdButton.disabled = true; // Disable the button
+    watchAdButton.textContent = "Watching Ad..."; // Change text to simulate the ad
+
+    setTimeout(() => {
+        // Ad finished
+        alert("You watched an ad! You earned 20 gold.");
+        gold += 20; // Reward player
+        watchAdButton.disabled = false; // Enable the button again
+        watchAdButton.textContent = "Watch Ad"; // Reset button text
+        updateStats(); // Update game stats
+    }, 3000); // Simulate a 3-second ad duration
 });
 
 // Initial update
