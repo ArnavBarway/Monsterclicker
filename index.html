@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Monster Hunter Clicker</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #2c3e50;
+            color: #ecf0f1;
+        }
+        #monster {
+            width: 200px;
+            cursor: pointer;
+        }
+        #stats {
+            margin: 20px 0;
+        }
+        .button {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            margin: 10px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        .button:hover {
+            background-color: #2980b9;
+        }
+        .health-bar {
+            width: 300px;
+            height: 20px;
+            background-color: #e74c3c;
+            margin: 10px auto;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        .health-bar-inner {
+            height: 100%;
+            background-color: #2ecc71;
+            width: 100%;
+            transition: width 0.2s;
+        }
+    </style>
+</head>
+<body>
+    <h1>Monster Hunter Clicker</h1>
+    <div id="stats">
+        <p>Gold: <span id="gold">0</span></p>
+        <p>Damage Per Click: <span id="dpc">1</span></p>
+        <p>Monster Health: <span id="health">100</span></p>
+    </div>
+    <div class="health-bar">
+        <div id="health-bar-inner" class="health-bar-inner"></div>
+    </div>
+    <img id="monster" src="https://via.placeholder.com/200" alt="Monster">
+    <div>
+        <button class="button" id="upgrade-dpc">Upgrade Damage (Cost: 10 Gold)</button>
+    </div>
+    <script src="game.js"></script>
+</body>
+</html>
