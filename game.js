@@ -73,43 +73,36 @@ function onBuyUpgrade() {
 function onBuyGoldBoost() {
     // Check if the player has enough gold for the gold boost
     if (gold >= 50) {
-        gold -= 50; // Deduct the cost of the gold boost
+        gold -= 50; // Deduct gold
         goldBoostActive = true; // Activate gold boost
-
-        // Disable the button temporarily
-        buyGoldBoostButton.disabled = true;
 
         // Update displayed stats
         updateStats();
 
-        // Set a timer to deactivate the gold boost after 60 seconds
+        // Notify the player about the boost duration
+        const boostTimer = document.getElementById("boost-timer");
+        boostTimer.textContent = "Gold Boost Active: 60s";
+
+        // Deactivate gold boost after 60 seconds
         setTimeout(() => {
             goldBoostActive = false;
-            buyGoldBoostButton.disabled = false; // Re-enable the button
-        }, 60000); // 60,000 milliseconds = 60 seconds
+            boostTimer.textContent = ""; // Clear boost timer display
+        }, 60000);
     } else {
-        alert("Not enough gold to buy this boost!");
+        alert("Not enough gold for a gold boost!");
     }
 }
 
-// Event listener for clicking on the monster
-monster.addEventListener("click", onMonsterClick);
-
-// Event listener for opening the shop modal
+// Event Listeners
+monster.addEventListener("click", onMonsterClick); // Handle monster clicks
+buyUpgradeButton.addEventListener("click", onBuyUpgrade); // Handle buying upgrades
+buyGoldBoostButton.addEventListener("click", onBuyGoldBoost); // Handle buying gold boosts
 shopButton.addEventListener("click", () => {
-    shopModal.style.display = "block"; // Show the shop modal
+    shopModal.style.display = "block"; // Show shop modal
 });
-
-// Event listener for closing the shop modal
 closeShopButton.addEventListener("click", () => {
-    shopModal.style.display = "none"; // Hide the shop modal
+    shopModal.style.display = "none"; // Hide shop modal
 });
 
-// Event listener for buying the damage upgrade
-buyUpgradeButton.addEventListener("click", onBuyUpgrade);
-
-// Event listener for buying the gold boost
-buyGoldBoostButton.addEventListener("click", onBuyGoldBoost);
-
-// Update the stats display on page load
+// Initial stats update
 updateStats();
