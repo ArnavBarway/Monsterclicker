@@ -18,7 +18,6 @@ const closeShopButton = document.getElementById("close-shop");
 const buyUpgradeButton = document.getElementById("buy-upgrade");
 const buyGoldBoostButton = document.getElementById("buy-gold-boost");
 const upgradeCostDisplay = document.getElementById("upgrade-cost");
-const earnGoldAdButton = document.getElementById("earn-gold-ad");
 
 // Function to update displayed stats
 function updateStats() {
@@ -95,13 +94,6 @@ function activateGoldBoost() {
     }
 }
 
-// Function to simulate earning gold by watching an ad
-function earnGoldByWatchingAd() {
-    alert("Ad watched! You earned 50 gold.");
-    gold += 50; // Add 50 gold for watching the ad
-    updateStats(); // Update the stats
-}
-
 // Function to initialize UI elements
 function initializeUI() {
     upgradeCostDisplay.textContent = upgradeCost;
@@ -116,7 +108,6 @@ shopButton.addEventListener("click", showShopModal);
 closeShopButton.addEventListener("click", closeShop);
 buyUpgradeButton.addEventListener("click", upgradeDamage);
 buyGoldBoostButton.addEventListener("click", activateGoldBoost);
-earnGoldAdButton.addEventListener("click", earnGoldByWatchingAd);
 
 // Initialize the game
 initializeUI();
