@@ -1,10 +1,10 @@
 // Initialize game variables and load from localStorage if available
-let gold = localStorage.getItem("gold") ? parseInt(localStorage.getItem("gold")) : 0;
-let damagePerClick = localStorage.getItem("dpc") ? parseInt(localStorage.getItem("dpc")) : 1;
-let monsterHealth = localStorage.getItem("health") ? parseInt(localStorage.getItem("health")) : 100;
-let maxHealth = 100; // Base maximum health for monsters
-let upgradeCost = 10; // Base cost for upgrading damage per click
-let goldBoostActive = false; // Tracks if gold boost is currently active
+let gold = parseInt(localStorage.getItem("gold")) || 0;
+let damagePerClick = parseInt(localStorage.getItem("dpc")) || 1;
+let monsterHealth = parseInt(localStorage.getItem("health")) || 100;
+let maxHealth = parseInt(localStorage.getItem("maxHealth")) || 100; // Save max health to localStorage
+let upgradeCost = parseInt(localStorage.getItem("upgradeCost")) || 10;
+let goldBoostActive = JSON.parse(localStorage.getItem("goldBoostActive")) || false;
 
 // DOM elements
 const goldDisplay = document.getElementById("gold");
@@ -18,36 +18,45 @@ const closeShopButton = document.getElementById("close-shop");
 const buyUpgradeButton = document.getElementById("buy-upgrade");
 const buyGoldBoostButton = document.getElementById("buy-gold-boost");
 const upgradeCostDisplay = document.getElementById("upgrade-cost");
+const earnGoldAdButton = document.getElementById("earn-gold-ad");
 
 // Function to update displayed stats
 function updateStats() {
-    goldDisplay.textContent = gold; // Update gold display
-    dpcDisplay.textContent = damagePerClick; // Update damage per click display
-    healthDisplay.textContent = monsterHealth; // Update current monster health
-    healthBar.style.width = `${(monsterHealth / maxHealth) * 100}%`; // Update health bar width
+    goldDisplay.textContent = gold;
+    dpcDisplay.textContent = damagePerClick;
+    healthDisplay.textContent = monsterHealth;
+    healthBar.style.width = `${(monsterHealth / maxHealth) * 100}%`;
 
     // Save the current state to localStorage
     localStorage.setItem("gold", gold);
     localStorage.setItem("dpc", damagePerClick);
     localStorage.setItem("health", monsterHealth);
+    localStorage.setItem("maxHealth", maxHealth);
+    localStorage.setItem("upgradeCost", upgradeCost);
+    localStorage.setItem("goldBoostActive", goldBoostActive);
 }
 
 // Function to handle monster clicks
 function onMonsterClick() {
-    // Reduce monster's health by the current damage per click
-    monsterHealth -= damagePerClick;
+    if (monsterHealth > 0) {
+        monsterHealth -= damagePerClick;
 
-    // Check if the monster is defeated
-    if (monsterHealth <= 0) {
-        // Reward gold for defeating the monster
-        gold += goldBoostActive ? 20 : 10; // Double reward if gold boost is active
+        if (monsterHealth <= 0) {
+            monsterHealth = 0;
+            defeatMonster();
+        }
 
-        // Increase the monster's max health for the next spawn
-        maxHealth += 20;
-        monsterHealth = maxHealth; // Reset the monster's health
+        updateStats();
     }
+}
 
-    updateStats(); // Update the stats
+// Function to handle monster defeat
+function defeatMonster() {
+    gold += goldBoostActive ? 20 : 10;
+    maxHealth += 20;
+    monsterHealth = maxHealth;
+
+    updateStats();
 }
 
 // Function to show the shop modal
@@ -65,9 +74,10 @@ function upgradeDamage() {
     if (gold >= upgradeCost) {
         gold -= upgradeCost;
         damagePerClick++;
-        upgradeCost = Math.floor(upgradeCost * 1.5); // Increase cost for next upgrade
+        upgradeCost = Math.floor(upgradeCost * 1.5);
+
         updateStats();
-        upgradeCostDisplay.textContent = upgradeCost; // Update upgrade cost display
+        upgradeCostDisplay.textContent = upgradeCost;
     }
 }
 
@@ -77,10 +87,27 @@ function activateGoldBoost() {
         gold -= 50;
         goldBoostActive = true;
         updateStats();
+
         setTimeout(() => {
-            goldBoostActive = false; // Deactivate gold boost after 1 minute
+            goldBoostActive = false;
+            updateStats();
         }, 60000);
     }
+}
+
+// Function to simulate earning gold by watching an ad
+function earnGoldByWatchingAd() {
+    alert("Ad watched! You earned 50 gold.");
+    gold += 50; // Add 50 gold for watching the ad
+    updateStats(); // Update the stats
+}
+
+// Function to initialize UI elements
+function initializeUI() {
+    upgradeCostDisplay.textContent = upgradeCost;
+
+    // Show monster health bar only when it's above 0
+    healthBar.style.display = monsterHealth > 0 ? "block" : "none";
 }
 
 // Event listeners
@@ -89,6 +116,8 @@ shopButton.addEventListener("click", showShopModal);
 closeShopButton.addEventListener("click", closeShop);
 buyUpgradeButton.addEventListener("click", upgradeDamage);
 buyGoldBoostButton.addEventListener("click", activateGoldBoost);
+earnGoldAdButton.addEventListener("click", earnGoldByWatchingAd);
 
-// Initial stats update
+// Initialize the game
+initializeUI();
 updateStats();
