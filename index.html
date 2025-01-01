@@ -25,9 +25,11 @@
             display: flex;
             justify-content: center;
             align-items: flex-start;
+            gap: 20px;
             padding: 20px;
         }
 
+        /* Stats Section */
         #stats {
             background: #162447;
             border-radius: 10px;
@@ -59,9 +61,9 @@
 
         /* Shop Button */
         #shop-button {
-            position: absolute;
-            right: 20px;
+            position: fixed;
             top: 50%;
+            right: 20px;
             transform: translateY(-50%);
             background: transparent;
             border: none;
@@ -69,14 +71,15 @@
         }
 
         #shop-button img {
-            width: 80px;
-            height: 80px;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
         }
 
-        /* Remove Ads Button */
+        /* Subscription Button */
         #remove-ads {
             margin-top: 20px;
-            background-color: #ff6f61;
+            background-color: #f39c12;
             color: white;
             border: none;
             padding: 10px 20px;
@@ -85,7 +88,67 @@
         }
 
         #remove-ads:hover {
-            background-color: #e65c50;
+            background-color: #e67e22;
+        }
+
+        /* Popup Modal */
+        #shop-modal {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #1f4068;
+            border-radius: 10px;
+            padding: 20px;
+            width: 300px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            z-index: 1000;
+        }
+
+        #shop-modal h2 {
+            margin-bottom: 10px;
+        }
+
+        .shop-item {
+            background: #1b1b3a;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 8px;
+            text-align: left;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .shop-item h3 {
+            margin: 0;
+        }
+
+        .shop-item button {
+            margin-top: 10px;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        .shop-item button:hover {
+            background-color: #2980b9;
+        }
+
+        #close-shop {
+            margin-top: 10px;
+            background-color: #e74c3c;
+            color: white;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        #close-shop:hover {
+            background-color: #c0392b;
         }
     </style>
 </head>
@@ -101,12 +164,33 @@
                 <div id="health-bar-inner" class="health-bar-inner"></div>
             </div>
             <img id="monster" src="https://via.placeholder.com/250" alt="Monster">
-            <button id="remove-ads">Remove Ads</button>
         </div>
     </div>
+
+    <!-- Shop Button -->
     <button id="shop-button">
-        <img src="https://via.placeholder.com/80" alt="Shop">
+        <img src="https://via.placeholder.com/60" alt="Shop">
     </button>
+
+    <!-- Remove Ads Button -->
+    <button id="remove-ads">Remove Ads</button>
+
+    <!-- Shop Modal -->
+    <div id="shop-modal">
+        <h2>Shop</h2>
+        <div class="shop-item">
+            <h3>Upgrade Damage</h3>
+            <p>Increase your damage per click. Cost: <span id="upgrade-cost">10</span> Gold</p>
+            <button id="buy-upgrade">Buy</button>
+        </div>
+        <div class="shop-item">
+            <h3>Gold Boost</h3>
+            <p>Earn 2x gold for 1 minute. Cost: 50 Gold</p>
+            <button id="buy-gold-boost">Buy</button>
+        </div>
+        <button id="close-shop">Close</button>
+    </div>
+
     <script src="game.js"></script>
 </body>
 </html>
