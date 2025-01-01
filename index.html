@@ -6,6 +6,7 @@
     <meta name="google-adsense-account" content="ca-pub-5679528715321899">
     <title>Monster Hunter Clicker</title>
     <style>
+        /* General Styling */
         body {
             font-family: Arial, sans-serif;
             text-align: center;
@@ -19,11 +20,11 @@
             margin-top: 20px;
         }
 
+        /* Game Container */
         #game-container {
             display: flex;
             justify-content: center;
             align-items: flex-start;
-            gap: 20px;
             padding: 20px;
         }
 
@@ -56,23 +57,26 @@
             cursor: pointer;
         }
 
-        #shop-btn {
-            position: fixed;
+        /* Shop Button */
+        #shop-button {
+            position: absolute;
             right: 20px;
             top: 50%;
             transform: translateY(-50%);
-            background-color: transparent;
+            background: transparent;
             border: none;
             cursor: pointer;
         }
 
-        #shop-btn img {
-            width: 60px;
+        #shop-button img {
+            width: 80px;
+            height: 80px;
         }
 
-        #subscribe-btn {
+        /* Remove Ads Button */
+        #remove-ads {
             margin-top: 20px;
-            background-color: #3498db;
+            background-color: #ff6f61;
             color: white;
             border: none;
             padding: 10px 20px;
@@ -80,8 +84,8 @@
             border-radius: 5px;
         }
 
-        #subscribe-btn:hover {
-            background-color: #2980b9;
+        #remove-ads:hover {
+            background-color: #e65c50;
         }
     </style>
 </head>
@@ -97,11 +101,11 @@
                 <div id="health-bar-inner" class="health-bar-inner"></div>
             </div>
             <img id="monster" src="https://via.placeholder.com/250" alt="Monster">
-            <button id="subscribe-btn">Remove Ads (₹50)</button>
+            <button id="remove-ads">Remove Ads</button>
         </div>
     </div>
-    <button id="shop-btn">
-        <img src="https://via.placeholder.com/60?text=Shop" alt="Shop">
+    <button id="shop-button">
+        <img src="https://via.placeholder.com/80" alt="Shop">
     </button>
     <script src="game.js"></script>
 </body>
