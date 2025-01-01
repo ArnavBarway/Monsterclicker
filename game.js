@@ -44,65 +44,51 @@ function onMonsterClick() {
 
         // Increase the monster's max health for the next spawn
         maxHealth += 20;
-        monsterHealth = maxHealth; // Reset the monster's health to the new max
+        monsterHealth = maxHealth; // Reset the monster's health
     }
 
-    // Update displayed stats
-    updateStats();
+    updateStats(); // Update the stats
 }
 
-// Function to handle buying damage upgrades
-function onBuyUpgrade() {
-    // Check if the player has enough gold to buy the upgrade
+// Function to show the shop modal
+function showShopModal() {
+    shopModal.style.display = "block";
+}
+
+// Function to close the shop modal
+function closeShop() {
+    shopModal.style.display = "none";
+}
+
+// Function to upgrade damage per click
+function upgradeDamage() {
     if (gold >= upgradeCost) {
-        gold -= upgradeCost; // Deduct gold
-        damagePerClick += 1; // Increase damage per click
-        upgradeCost += 5; // Increment upgrade cost for next level
-
-        // Update the displayed upgrade cost
-        upgradeCostDisplay.textContent = upgradeCost;
-
-        // Update displayed stats
+        gold -= upgradeCost;
+        damagePerClick++;
+        upgradeCost = Math.floor(upgradeCost * 1.5); // Increase cost for next upgrade
         updateStats();
-    } else {
-        alert("Not enough gold to buy this upgrade!");
+        upgradeCostDisplay.textContent = upgradeCost; // Update upgrade cost display
     }
 }
 
-// Function to activate a gold boost for 60 seconds
-function onBuyGoldBoost() {
-    // Check if the player has enough gold for the gold boost
-    if (gold >= 50) {
-        gold -= 50; // Deduct gold
-        goldBoostActive = true; // Activate gold boost
-
-        // Update displayed stats
+// Function to activate the gold boost
+function activateGoldBoost() {
+    if (gold >= 50 && !goldBoostActive) {
+        gold -= 50;
+        goldBoostActive = true;
         updateStats();
-
-        // Notify the player about the boost duration
-        const boostTimer = document.getElementById("boost-timer");
-        boostTimer.textContent = "Gold Boost Active: 60s";
-
-        // Deactivate gold boost after 60 seconds
         setTimeout(() => {
-            goldBoostActive = false;
-            boostTimer.textContent = ""; // Clear boost timer display
+            goldBoostActive = false; // Deactivate gold boost after 1 minute
         }, 60000);
-    } else {
-        alert("Not enough gold for a gold boost!");
     }
 }
 
-// Event Listeners
-monster.addEventListener("click", onMonsterClick); // Handle monster clicks
-buyUpgradeButton.addEventListener("click", onBuyUpgrade); // Handle buying upgrades
-buyGoldBoostButton.addEventListener("click", onBuyGoldBoost); // Handle buying gold boosts
-shopButton.addEventListener("click", () => {
-    shopModal.style.display = "block"; // Show shop modal
-});
-closeShopButton.addEventListener("click", () => {
-    shopModal.style.display = "none"; // Hide shop modal
-});
+// Event listeners
+monster.addEventListener("click", onMonsterClick);
+shopButton.addEventListener("click", showShopModal);
+closeShopButton.addEventListener("click", closeShop);
+buyUpgradeButton.addEventListener("click", upgradeDamage);
+buyGoldBoostButton.addEventListener("click", activateGoldBoost);
 
 // Initial stats update
 updateStats();
