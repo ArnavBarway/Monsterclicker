@@ -6,6 +6,7 @@
     <meta name="google-adsense-account" content="ca-pub-5679528715321899">
     <title>Monster Hunter Clicker</title>
     <style>
+        /* General Styling */
         body {
             font-family: Arial, sans-serif;
             text-align: center;
@@ -14,9 +15,12 @@
             margin: 0;
             padding: 0;
         }
+
         h1 {
             margin-top: 20px;
         }
+
+        /* Game Container */
         #game-container {
             display: flex;
             justify-content: center;
@@ -24,15 +28,19 @@
             gap: 20px;
             padding: 20px;
         }
+
+        /* Stats Section */
         #stats, #shop {
             background: #162447;
             border-radius: 10px;
             padding: 20px;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
         }
+
         #stats {
             width: 300px;
         }
+
         .health-bar {
             width: 300px;
             height: 20px;
@@ -41,19 +49,24 @@
             margin: 10px auto;
             overflow: hidden;
         }
+
         .health-bar-inner {
             height: 100%;
             background-color: #2ecc71;
             width: 100%;
             transition: width 0.2s;
         }
+
         #monster {
             width: 250px;
             cursor: pointer;
         }
+
+        /* Shop Section */
         #shop h2 {
             margin-bottom: 10px;
         }
+
         .shop-item {
             background: #1f4068;
             padding: 10px;
@@ -62,9 +75,11 @@
             text-align: left;
             box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
         }
+
         .shop-item h3 {
             margin: 0;
         }
+
         .shop-item button {
             margin-top: 10px;
             background-color: #3498db;
@@ -74,9 +89,11 @@
             cursor: pointer;
             border-radius: 5px;
         }
+
         .shop-item button:hover {
             background-color: #2980b9;
         }
+
         #boost-timer {
             font-size: 1.2em;
             color: #f1c40f;
